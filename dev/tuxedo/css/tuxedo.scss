@@ -1,0 +1,358 @@
+﻿@import '_model.scss';
+
+:root {
+    @each $name, $color in $base-colors {
+        --tux-#{$name}: #{$color};
+    }
+}
+
+body {
+    font-style: normal;
+    color: map_get($base-colors, 'light');
+    background-color: map_get($base-colors, 'dark');
+    @include flex(column, space-evenly, center);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    background-color: map_get($dark-colors, 'dark');
+    @include flex(row, end, center);
+    position: fixed;
+    top: 0;
+    min-width: 100vw;
+    height: 4.1rem;
+    margin: 0;
+    padding-right: 1em;
+    z-index:1000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@each $name, $color in $base-colors {
+    .bg-#{$name} {
+        background-color: $color !important;
+    }
+
+    .bg-dark-#{$name} {
+        background-color: map_get($dark-colors, $name) !important;
+    }
+
+    .bg-light-#{$name} {
+        background-color: map_get($light-colors, $name) !important;
+    }
+
+    .bg-hover-#{$name}:hover {
+        background-color: $color !important;
+    }
+
+    .bg-hover-dark-#{$name}:hover {
+        background-color: map_get($dark-colors, $name) !important;
+    }
+
+    .bg-hover-light-#{$name}:hover {
+        background-color: map_get($light-colors, $name) !important;
+    }
+
+    .bg-trans-#{$name}{
+        background-color:transparentize($color, 0.6);
+    }
+
+    .t-#{$name} {
+        color: $color !important;
+    }
+
+    .t-hover-#{$name}:hover {
+        color: $color !important;
+    }
+
+    .t-hover-dark-#{$name}:hover {
+        color: map_get($dark-colors, $name) !important;
+    }
+
+    .t-hover-light-#{$name}:hover {
+        color: map_get($light-colors, $name) !important;
+    }
+
+    .border-#{$name} {
+        border-color: $color !important;
+    }
+
+    .border-dark-#{$name} {
+        border-color: map_get($dark-colors, $name);
+    }
+
+    .border-light-#{$name} {
+        border-color: map_get($light-colors, $name);
+    }
+
+    .btn-#{$name} {
+        @if $name == 'light' {
+            color: map_get($base-colors, 'dark') !important;
+        }
+        @else {
+            color: map_get($base-colors, 'light') !important;
+        }
+
+        border-color: $color !important;
+        background-color: $color !important;
+
+        &:hover {
+            border-color: map_get($dark-colors, $name) !important;
+            background-color: map_get($dark-colors, $name) !important;
+        }
+    }
+
+    .btn-dark-#{$name} {
+        color: map_get($base-colors, 'light') !important;
+        border-color: map_get($dark-colors, $name) !important;
+        background-color: map_get($dark-colors, $name) !important;
+
+        &:hover {
+            border-color: map_get($base-colors, $name) !important;
+            background-color: map_get($base-colors, $name) !important;
+        }
+    }
+
+    .btn-light-#{$name} {
+        color: map_get($base-colors, 'dark') !important;
+        border-color: map_get($light-colors, $name) !important;
+        background-color: map_get($light-colors, $name) !important;
+
+        &:hover {
+            border-color: map_get($base-colors, $name) !important;
+            background-color: map_get($base-colors, $name) !important;
+        }
+    }
+}
+
+.bg-transparent {
+    background-color: transparent !important;
+}
+
+.btn-transparent{
+    background:transparent !important;
+    border:none !important;
+}
+
+.btn-link {
+    background: transparent !important;
+    border: none !important;
+    color:map_get($base-colors, 'blue');
+    font-weight:400;
+
+    &:hover{
+        font-weight:600;
+    }
+}
+
+@each $name, $size in $sizes {
+    .rect-#{$name} {
+        @include rect($name);
+    }
+
+    .hpx-#{$name} {
+        height: $size !important;
+
+        &.rounded-end {
+            border-bottom-right-radius: $size/2 !important;
+            border-top-right-radius: $size/2 !important;
+        }
+
+        &.rounded-start {
+            border-bottom-left-radius: $size/2 !important;
+            border-top-left-radius: $size/2 !important;
+        }
+    }
+
+    .wpx-#{$name} {
+        width: $size !important;
+    }
+}
+
+@each $name, $value in $mp {
+
+    .mt-#{$name}, .my-#{$name}, .m-#{$name} {
+        margin-top: #{$value} !important;
+    }
+
+    .mb-#{$name}, .my-#{$name}, .m-#{$name} {
+        margin-bottom: #{$value} !important;
+    }
+
+    .ms-#{$name}, .mx-#{$name}, .m-#{$name} {
+        margin-left: #{$value} !important;
+    }
+
+    .me-#{$name}, .mx-#{$name}, .m-#{$name} {
+        margin-right: #{$value} !important;
+    }
+
+    .pt-#{$name}, .py-#{$name}, .p-#{$name} {
+        padding-top: #{$value} !important;
+    }
+
+    .pb-#{$name}, .py-#{$name}, .p-#{$name} {
+        padding-bottom: #{$value} !important;
+    }
+
+    .ps-#{$name}, .px-#{$name}, .p-#{$name} {
+        padding-left: #{$value} !important;
+    }
+
+    .pe-#{$name}, .px-#{$name}, .p-#{$name} {
+        padding-right: #{$value} !important;
+    }
+
+    $vpx: $value - 0.1rem;
+    .border-#{$name}{
+        border-width: #{$vpx} !important;
+        border-style: solid;
+    }
+
+    .border-start-#{$name}{
+        border-left-width: #{$vpx} !important;
+        border-top-width: 0;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-style:solid;
+    }
+
+    .border-top-#{$name} {
+        border-left-width: 0;
+        border-top-width: #{$vpx} !important;
+        border-right-width: 0;
+        border-bottom-width: 0;
+        border-style: solid;
+    }
+
+    .border-end-#{$name} {
+        border-left-width: 0;
+        border-top-width: 0;
+        border-right-width: #{$vpx} !important;
+        border-bottom-width: 0;
+        border-style: solid;
+    }
+
+    .border-bottom-#{$name} {
+        border-left-width: 0;
+        border-top-width: 0;
+        border-right-width: 0;
+        border-bottom-width: #{$vpx} !important;
+        border-style: solid;
+    }
+
+    .rounded-#{$name}{
+        border-radius: #{$value} !important;
+    }
+
+    $vi: index($mp, ($name $value)) * 500;
+    .index-#{$name}{
+        z-index: #{$vi};
+    }
+
+    .left-#{$name}{
+        left:#{$value};
+    }
+
+    .top-#{$name}{
+        top:#{$value};
+    }
+
+    .right-#{$name}{
+        right:#{$value};
+    }
+
+    .bottom-#{$name}{
+        bottom:#{$value};
+    }
+
+
+}
+
+@for $i from 10 to 100 {
+    @if $i % 10 == 0 {
+        .w-#{$i} {
+            width: #{$i}#{'%'} !important;
+        }
+    }
+}
+
+.flex-center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-start {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.rounded-end-0 {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.rounded-start-0 {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+.pos-rel{
+    position:relative;
+}
+
+.pos-abs{
+    position:absolute;
+}
+
+.pos-fixed{
+    position:fixed;
+}
+
+.c-hand {
+    cursor: pointer;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.no-select {
+    user-select: none;
+}
+
+.no-after::after {
+    content: none;
+}
+
+.pic-cover{
+    object-fit:cover;
+}
