@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuxedo</title>
+
+    @foreach(string style in AppSettings.Instance.Styles)
+    {
+        @Html.Raw(style)
+    }
+
+    @await RenderSectionAsync("styles", false)
+
+</head>
+<body>
+    @RenderBody()
+
+    @await RenderSectionAsync("modals", false)
+
+    @foreach (string script in AppSettings.Instance.Scripts)
+    {
+        @Html.Raw(script)
+    }
+
+    <script>
+        tuxApp.onReady(() => {
+            console.log('hola mundo');
+        });
+    </script>
+
+    @await RenderSectionAsync("scripts", false)
+
+    <script>
+        tuxApp.ready();
+    </script>
+
+</body>
+</html>

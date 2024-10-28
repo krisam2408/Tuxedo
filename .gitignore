@@ -1,1 +1,5 @@
-/liliputhsTests
+liliputhsTests/
+.vscode/
+.vs/
+obj/
+bin/
