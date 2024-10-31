@@ -10,11 +10,17 @@
         @Html.Raw(style)
     }
 
+    <link href="~/css/app.min.css" rel="stylesheet" />
+
     @await RenderSectionAsync("styles", false)
 
 </head>
-<body>
+<body class="dark bd-3">
+    <partial name="_Header" />
+
     @RenderBody()
+
+    <partial name="_Footer" />
 
     @await RenderSectionAsync("modals", false)
 
@@ -25,7 +31,7 @@
 
     <script>
         tuxApp.onReady(() => {
-            console.log('hola mundo');
+            console.log('tuxedo loaded');
         });
     </script>
 

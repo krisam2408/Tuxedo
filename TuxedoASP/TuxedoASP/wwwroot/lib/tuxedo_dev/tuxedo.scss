@@ -1,30 +1,19 @@
-﻿@import '_model.scss';
+﻿@import 'css/_model.scss';
+@import 'css/_colors.scss';
+@import 'css/_forms.scss';
+@import 'css/_layout.scss';
 
 :root {
-    @each $name, $color in $base-colors {
+    @each $name, $color in $colors {
         --tux-#{$name}: #{$color};
     }
-}
-
-body {
-    font-style: normal;
-    color: map_get($base-colors, 'light');
-    background-color: map_get($base-colors, 'dark');
-    @include flex(column, space-evenly, center);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-header {
-    background-color: map_get($dark-colors, 'dark');
-    @include flex(row, end, center);
-    position: fixed;
-    top: 0;
-    min-width: 100vw;
-    height: 4.1rem;
-    margin: 0;
-    padding-right: 1em;
-    z-index:1000;
+    @each $name, $color in $l-colors{
+        --tux-l-#{$name}:#{$color};
+    }
+    @each $name, $color in $d-colors{
+        --tux-d-#{$name}:#{$color};
+    }
+    --tux-link:var(--tux-blue);
 }
 
 * {
@@ -32,29 +21,58 @@ header {
     padding: 0;
 }
 
-@each $name, $color in $base-colors {
+body {
+    font-style: normal;
+    font-size:14pt;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    &.dark{
+        color: var(--tux-light);
+        background-color: var(--tux-dark);
+    }
+
+    &.light{
+        color: var(--tux-dark);
+        background-color: var(--tux-light);
+    }
+
+    &.bd-3{
+        @include flex(column, space-between, center);
+    }
+}
+
+header {
+    min-width: 100vw;
+    height: 4.1rem;
+    margin: 0;
+    padding: 1em 0.5em;
+    z-index:1000;
+}
+
+@each $name, $color in $colors {
     .bg-#{$name} {
-        background-color: $color !important;
+        background-color: cssvar($name) !important;
     }
 
-    .bg-dark-#{$name} {
-        background-color: map_get($dark-colors, $name) !important;
+    .bg-d-#{$name} {
+        background-color: cssvar($name, tux-d) !important;
     }
 
-    .bg-light-#{$name} {
-        background-color: map_get($light-colors, $name) !important;
+    .bg-l-#{$name} {
+        background-color: cssvar($name,tux-l) !important;
     }
 
     .bg-hover-#{$name}:hover {
-        background-color: $color !important;
+        background-color: cssvar($name) !important;
     }
 
-    .bg-hover-dark-#{$name}:hover {
-        background-color: map_get($dark-colors, $name) !important;
+    .bg-hover-d-#{$name}:hover {
+        background-color: cssvar($name, tux-d) !important;
     }
 
-    .bg-hover-light-#{$name}:hover {
-        background-color: map_get($light-colors, $name) !important;
+    .bg-hover-l-#{$name}:hover {
+        background-color: cssvar($name,tux-l) !important;
     }
 
     .bg-trans-#{$name}{
@@ -62,69 +80,69 @@ header {
     }
 
     .t-#{$name} {
-        color: $color !important;
+        color: cssvar($name) !important;
     }
 
     .t-hover-#{$name}:hover {
-        color: $color !important;
+        color: cssvar($name) !important;
     }
 
-    .t-hover-dark-#{$name}:hover {
-        color: map_get($dark-colors, $name) !important;
+    .t-hover-d-#{$name}:hover {
+        color: cssvar($name,tux-d) !important;
     }
 
-    .t-hover-light-#{$name}:hover {
-        color: map_get($light-colors, $name) !important;
+    .t-hover-l-#{$name}:hover {
+        color: cssvar($name,tux-l) !important;
     }
 
     .border-#{$name} {
-        border-color: $color !important;
+        border-color: cssvar($name) !important;
     }
 
-    .border-dark-#{$name} {
-        border-color: map_get($dark-colors, $name);
+    .border-d-#{$name} {
+        border-color: cssvar($name,tux-d);
     }
 
-    .border-light-#{$name} {
-        border-color: map_get($light-colors, $name);
+    .border-l-#{$name} {
+        border-color: cssvar($name,tux-l);
     }
 
     .btn-#{$name} {
         @if $name == 'light' {
-            color: map_get($base-colors, 'dark') !important;
+            color: var(--tux-dark) !important;
         }
         @else {
-            color: map_get($base-colors, 'light') !important;
+            color: var(--tux-light) !important;
         }
 
-        border-color: $color !important;
-        background-color: $color !important;
+        border-color: cssvar($name) !important;
+        background-color: cssvar($name) !important;
 
         &:hover {
-            border-color: map_get($dark-colors, $name) !important;
-            background-color: map_get($dark-colors, $name) !important;
-        }
-    }
-
-    .btn-dark-#{$name} {
-        color: map_get($base-colors, 'light') !important;
-        border-color: map_get($dark-colors, $name) !important;
-        background-color: map_get($dark-colors, $name) !important;
-
-        &:hover {
-            border-color: map_get($base-colors, $name) !important;
-            background-color: map_get($base-colors, $name) !important;
+            border-color: cssvar($name,tux-d) !important;
+            background-color: cssvar($name,tux-d) !important;
         }
     }
 
-    .btn-light-#{$name} {
-        color: map_get($base-colors, 'dark') !important;
-        border-color: map_get($light-colors, $name) !important;
-        background-color: map_get($light-colors, $name) !important;
+    .btn-d-#{$name} {
+        color: var(--tux-light) !important;
+        border-color: cssvar($name,tux-d) !important;
+        background-color: cssvar($name,tux-d) !important;
 
         &:hover {
-            border-color: map_get($base-colors, $name) !important;
-            background-color: map_get($base-colors, $name) !important;
+            border-color: cssvar($name) !important;
+            background-color: cssvar($name) !important;
+        }
+    }
+
+    .btn-l-#{$name} {
+        color: var(--tux-dark) !important;
+        border-color: cssvar($name,tux-l) !important;
+        background-color: cssvar($name,tux-l) !important;
+
+        &:hover {
+            border-color: cssvar($name) !important;
+            background-color: cssvar($name) !important;
         }
     }
 }
@@ -141,21 +159,53 @@ header {
 .btn-link {
     background: transparent !important;
     border: none !important;
-    color:map_get($base-colors, 'blue');
-    font-weight:400;
+    color: var(--tux-link);
+    font-weight: 400;
 
-    &:hover{
-        font-weight:600;
+    &:hover {
+        font-weight: 600;
+    }
+}
+
+.c-hand {
+    cursor: pointer;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.no-select {
+    user-select: none;
+}
+
+.no-after::after {
+    content: none;
+}
+
+.pic-cover {
+    object-fit: cover;
+}
+
+@each $name, $break in $bp{
+    @media only screen and (min-width: $break){
+        body-#{$name}{
+            width:$break;
+        }
     }
 }
 
 @each $name, $size in $sizes {
     .rect-#{$name} {
-        @include rect($name);
+        @include rect($size);
     }
 
     .hpx-#{$name} {
-        height: $size !important;
+        @include f-height($size);
 
         &.rounded-end {
             border-bottom-right-radius: $size/2 !important;
@@ -169,7 +219,7 @@ header {
     }
 
     .wpx-#{$name} {
-        width: $size !important;
+        @include f-width($size);
     }
 }
 
@@ -273,7 +323,17 @@ header {
 
 }
 
-@for $i from 10 to 100 {
+.rounded-end-0 {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.rounded-start-0 {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+}
+
+@for $i from 10 to 101 {
     @if $i % 10 == 0 {
         .w-#{$i} {
             width: #{$i}#{'%'} !important;
@@ -311,15 +371,7 @@ header {
     align-items: center;
 }
 
-.rounded-end-0 {
-    border-bottom-right-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-}
 
-.rounded-start-0 {
-    border-bottom-left-radius: 0 !important;
-    border-top-left-radius: 0 !important;
-}
 
 .pos-rel{
     position:relative;
@@ -333,26 +385,6 @@ header {
     position:fixed;
 }
 
-.c-hand {
-    cursor: pointer;
-}
-
-.text-justify {
-    text-align: justify !important;
-}
-
-.no-decoration {
-    text-decoration: none;
-}
-
-.no-select {
-    user-select: none;
-}
-
-.no-after::after {
-    content: none;
-}
-
-.pic-cover{
-    object-fit:cover;
+.pos-sticky{
+    position:sticky;
 }

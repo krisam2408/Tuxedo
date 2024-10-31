@@ -1,0 +1,40 @@
+﻿$colors: ('dark': #24292E, 'light': #CBD2DA, 'red': #D72A1A, 'orange': #D77A1A, 'yellow': #B9B927, 'lime': #6FC618, 'green': #17BE17, 'teal': #18C36D, 'cyan': #15ACAC, 'ocean': #1A79D7, 'blue': #3737E7, 'purple': #8A21F4, 'magenta': #C318C3, 'rosa': #E21B7F);
+
+$l-colors: ('dark': #7C7F82, 'light': #E0E4E9, 'red': #E77F76, 'orange': #E7AF76, 'yellow': #D5D57D, 'lime': #A9DD74, 'green': #74D874, 'teal': #74DBA7, 'cyan': #73CDCD, 'ocean': #76AFE7, 'blue': #8787F1, 'purple': #B97AF8, 'magenta': #DB74DB, 'rosa': #EE76B2);
+
+$d-colors: ('dark': #16191C, 'light': #7A7E83, 'red': #811910, 'orange': #814910, 'yellow': #6F6F17, 'lime': #43770E, 'green': #0E720E, 'teal': #0E7541, 'cyan': #0D6767, 'ocean': #104981, 'blue': #21218B, 'purple': #531492, 'magenta': #750E75, 'rosa': #88104C);
+
+$sizes: ('8':8px, '16':16px, '24':24px, '32':32px, '40':40px, '48':48px, '56':56px, '64':64px, '72':72px, '80':80px, '88':88px, '96':96px, '104':104px, '112':112px, '120':120px, '128':128px, '136':136px, '144':144px, '152':152px, '160':160px, '168':168px, '176':176px, '184':184px, '192':192px, '200':200px, '208':208px, '216':216px, '224':224px, '232':232px, '240':240px, '248':248px, '256':256px);
+
+$mp: ('0':0rem, '1':0.25rem, '2':0.5rem, '3':1rem, '4':1.75rem, '5':2.9rem, '6':4.1rem, '7':5.6rem, '8':7.5rem, '9':9.5rem, '10':12rem);
+
+$bp:('s':0px, 'm':920px, 'l':1320px);
+
+@mixin flex($direction, $justify, $align)
+{
+    display:flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin f-width($size){
+    min-width: map_get($sizes, $size);
+    max-width: map_get($sizes, $size);
+    width: map_get($sizes, $size);
+}
+
+@mixin f-height($size) {
+    min-height: map_get($sizes, $size);
+    max-height: map_get($sizes, $size);
+    height: map_get($sizes, $size);
+}
+
+@mixin rect($size) {
+    @include f-width($size);
+    @include f-height($size);
+}
+
+@function cssvar($name, $prefix:tux){
+    @return var(--#{$prefix}-#{$name});
+}

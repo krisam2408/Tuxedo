@@ -1,17 +1,15 @@
-﻿using Newtonsoft.Json;
-
-namespace TuxedoASP.Models;
+﻿namespace TuxedoASP.Models;
 
 public sealed class AppSettings
 {
-    private readonly Style[] m_styles;
+    private readonly LinkedResource[] m_styles;
     public string[] Styles => m_styles
-        .Select(s => s.Html)
+        .Select(s => s.StyleTag)
         .ToArray();
 
-    private readonly Script[] m_scripts;
+    private readonly LinkedResource[] m_scripts;
     public string[] Scripts => m_scripts
-        .Select(s => s.Html)
+        .Select(s => s.ScriptTag)
         .ToArray();
 
     private static AppSettings? m_instance;
@@ -45,7 +43,7 @@ public sealed class AppSettings
             {
                 string? link = s.GetSection("link").Value;
                 if (string.IsNullOrWhiteSpace(link))
-                    return new Style()
+                    return new LinkedResource()
                     {
                         IsValid = false
                     };
@@ -53,7 +51,7 @@ public sealed class AppSettings
                 string? integrity = s.GetSection("integrity").Value;
                 string? crossorigin = s.GetSection("crossorigin").Value;
 
-                return new Style()
+                return new LinkedResource()
                 {
                     Link = link,
                     Integrity = integrity,
@@ -77,7 +75,7 @@ public sealed class AppSettings
             {
                 string? link = s.GetSection("link").Value;
                 if (string.IsNullOrWhiteSpace(link))
-                    return new Script()
+                    return new LinkedResource()
                     {
                         IsValid = false
                     };
@@ -85,7 +83,7 @@ public sealed class AppSettings
                 string? integrity = s.GetSection("integrity").Value;
                 string? crossorigin = s.GetSection("crossorigin").Value;
 
-                return new Script()
+                return new LinkedResource()
                 {
                     Link = link,
                     Integrity = integrity,
@@ -97,14 +95,14 @@ public sealed class AppSettings
             .ToArray();
     }
 
-    private struct Style
+    private struct LinkedResource
     {
         public string Link;
         public string? Integrity;
         public string? CrossOrigin;
         public bool IsValid;
 
-        public string Html
+        public string StyleTag
         {
             get
             {
@@ -113,16 +111,8 @@ public sealed class AppSettings
                 return $"<link href=\"{Link}\" rel=\"stylesheet\" integrity=\"{Integrity}\" crossorigin=\"{CrossOrigin}\" />";
             }
         }
-    }
 
-    private struct Script
-    {
-        public string Link;
-        public string? Integrity;
-        public string? CrossOrigin;
-        public bool IsValid;
-
-        public string Html
+        public string ScriptTag
         {
             get
             {

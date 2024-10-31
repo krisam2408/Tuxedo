@@ -22,6 +22,23 @@ const tuxApp = function () {
                 elems[i].addEventListener('contextmenu', (ev) => {
                     ev.preventDefault();
                 });
+        },
+        screenW: () => {
+            let data = {
+                screen: window.screen.width,
+                window: window.innerWidth
+            };
+            console.log(data);
+        },
+        screenH: () => {
+            let data = {
+                screen: window.screen.height,
+                window: window.innerHeight
+            };
+            console.log(data);
+        },
+        log: (msg) => {
+            console.log(msg);
         }
     };
 }();

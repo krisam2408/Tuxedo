@@ -1,1 +1,17 @@
-﻿
+﻿.docs-lay {
+  width: 100%;
+  display: grid;
+  flex-grow: 1;
+  grid-template-columns: 1fr auto 1fr;
+}
+.docs-lay .l-bar {
+  grid-column: 1;
+  overflow-y: auto;
+}
+.docs-lay .main {
+  grid-column: 2;
+  overflow-y: auto;
+}
+.docs-lay .r-bar {
+  grid-column: 3;
+}

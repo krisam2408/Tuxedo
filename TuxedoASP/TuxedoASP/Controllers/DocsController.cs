@@ -2,7 +2,7 @@
 
 namespace TuxedoASP.Controllers;
 
-public class HomeController : Controller
+public class DocsController : BaseController
 {
     public IActionResult Index()
     {

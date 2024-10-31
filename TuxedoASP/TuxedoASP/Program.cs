@@ -19,7 +19,7 @@ app.UseRouting();
 app.MapControllerRoute
 (
     name:"default",
-    pattern:"{controller=home}/{action=index}/{id?}"
+    pattern:"{controller=docs}/{action=index}/{id?}"
 );
 
 app.Run();
